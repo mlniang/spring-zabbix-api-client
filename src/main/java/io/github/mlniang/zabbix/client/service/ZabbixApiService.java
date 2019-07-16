@@ -1,7 +1,9 @@
-package io.github.mlniang.zabbix.client;
+package io.github.mlniang.zabbix.client.service;
 
+import io.github.mlniang.zabbix.client.Constants;
+import io.github.mlniang.zabbix.client.autoconfigure.ZabbixApiProperties;
+import io.github.mlniang.zabbix.client.dto.ZabbixAuthDTO;
 import io.github.mlniang.zabbix.client.exception.ZabbixApiException;
-import io.github.mlniang.zabbix.client.request.ZabbixAuthDTO;
 import io.github.mlniang.zabbix.client.request.ZabbixRequest;
 import io.github.mlniang.zabbix.client.response.ZabbixResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +24,12 @@ import java.util.Collections;
 @Slf4j
 public class ZabbixApiService {
 
-    private final ZabbixApiClientProperties properties;
+    private final ZabbixApiProperties properties;
     private final RestTemplate restTemplate;
     private final HttpHeaders headers;
 
-    public ZabbixApiService(ZabbixApiClientProperties zabbixApiClientProperties) {
-        this.properties = zabbixApiClientProperties;
+    public ZabbixApiService(ZabbixApiProperties zabbixApiProperties) {
+        this.properties = zabbixApiProperties;
         restTemplate = new RestTemplate();
         headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));

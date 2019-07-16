@@ -1,4 +1,4 @@
-package io.github.mlniang.zabbix.client;
+package io.github.mlniang.zabbix.client.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.StringUtils;
@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
  * @author Mamadou Lamine NIANG
  **/
 @ConfigurationProperties(prefix = "zabbix.api", ignoreUnknownFields = false)
-public class ZabbixApiClientProperties {
+public class ZabbixApiProperties {
 
     private String url;
 

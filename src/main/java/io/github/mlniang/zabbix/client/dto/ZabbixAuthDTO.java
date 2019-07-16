@@ -1,4 +1,4 @@
-package io.github.mlniang.zabbix.client.request;
+package io.github.mlniang.zabbix.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
