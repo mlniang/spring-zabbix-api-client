@@ -8,11 +8,13 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
+ * Represents a request object as defined by the <a href="https://www.jsonrpc.org/specification#request_object">JSON-RPC 2.0 specification</a>.
+ *
  * @author Mamadou Lamine NIANG
  **/
 @Data
 @NoArgsConstructor
-public class ZabbixRequest {
+public class JsonRPCRequest {
 
     private final String jsonrpc = "2.0";
     @NotBlank(message = "Please provide the method.")

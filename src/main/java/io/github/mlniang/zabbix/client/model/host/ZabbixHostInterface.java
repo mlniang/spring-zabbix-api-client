@@ -10,6 +10,9 @@ import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.Boolean
 import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.BooleanNumericSerializer;
 
 /**
+ * Zabbix host interface object.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/hostinterface/object#host_interface">Host interface</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

@@ -4,6 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
+ * Host inventory population mode.
+ *
+ * Possible values are:
+ * -1 - disabled;
+ * 0 - (default) manual;
+ * 1 - automatic.
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/object#host">Host object</a>
  * @author Mamadou Lamine NIANG
  **/
 public enum InventoryMode {

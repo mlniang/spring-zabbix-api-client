@@ -4,6 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
+ * Type of a host interface.
+ * Possible values are:
+ * 1 - agent;
+ * 2 - SNMP;
+ * 3 - IPMI;
+ * 4 - JMX.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/hostinterface/object#host_interface">Host interface</a>
  * @author Mamadou Lamine NIANG
  **/
 public enum InterfaceType {

@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
+ * Availability of Zabbix agent (readonly).
+ * Possible values are:
+ * 0 - (default) unknown;
+ * 1 - available;
+ * 2 - unavailable.
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/object#host">Host object</a>
  * @author Mamadou Lamine NIANG
  **/
 public enum Availabity {

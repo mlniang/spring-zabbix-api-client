@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Common get method parameters.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference_commentary#common_get_method_parameters">Common "get" method parameters</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

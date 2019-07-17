@@ -15,6 +15,9 @@ import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.Boolean
 import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.BooleanNumericSerializer;
 
 /**
+ * Zabbix Host object.
+ *
+ *@see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/object#host">Host object</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

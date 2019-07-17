@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.util.StringUtils;
 
 /**
+ * Host Inventory properties.
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/object#host_inventory">Host Inventory</a>
  * @author Mamadou Lamine NIANG
  **/
 public enum HostInventoryProperty {

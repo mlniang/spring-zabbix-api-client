@@ -1,5 +1,6 @@
 package io.github.mlniang.zabbix.client.autoconfigure;
 
+import io.github.mlniang.zabbix.client.rest.ZabbixApiExceptionHandler;
 import io.github.mlniang.zabbix.client.service.ZabbixApiService;
 import io.github.mlniang.zabbix.client.service.ZabbixHostService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -29,5 +30,10 @@ public class ZabbixClientAutoConfiguration {
     @Bean
     public ZabbixHostService zabbixHostService() {
         return new ZabbixHostService(zabbixApiService());
+    }
+
+    @Bean
+    public ZabbixApiExceptionHandler zabbixApiExceptionHandler() {
+        return new ZabbixApiExceptionHandler();
     }
 }

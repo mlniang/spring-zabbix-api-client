@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Zabbix method host.get parameters.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/get#parameters">Method host.get parameters</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

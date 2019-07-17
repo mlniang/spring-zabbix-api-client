@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Host Macro.
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/usermacro/object#host_macro">Host macro</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

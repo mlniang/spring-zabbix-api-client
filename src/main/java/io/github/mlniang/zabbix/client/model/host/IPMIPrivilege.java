@@ -4,6 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
+ * IPMI privilege level.
+ *
+ * Possible values are:
+ * 1 - callback;
+ * 2 - (default) user;
+ * 3 - operator;
+ * 4 - admin;
+ * 5 - OEM.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/host/object#host">Host object</a>
  * @author Mamadou Lamine NIANG
  **/
 public enum IPMIPrivilege {

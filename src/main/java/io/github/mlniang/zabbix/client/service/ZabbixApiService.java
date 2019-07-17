@@ -1,11 +1,11 @@
 package io.github.mlniang.zabbix.client.service;
 
-import io.github.mlniang.zabbix.client.Constants;
 import io.github.mlniang.zabbix.client.autoconfigure.ZabbixApiProperties;
 import io.github.mlniang.zabbix.client.dto.ZabbixAuthDTO;
 import io.github.mlniang.zabbix.client.exception.ZabbixApiException;
-import io.github.mlniang.zabbix.client.request.ZabbixRequest;
-import io.github.mlniang.zabbix.client.response.ZabbixResponse;
+import io.github.mlniang.zabbix.client.request.JsonRPCRequest;
+import io.github.mlniang.zabbix.client.response.JsonRPCResponse;
+import io.github.mlniang.zabbix.client.utils.ZabbixApiUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,8 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.Objects;
 
 /**
+ * Main service making requests to Zabbix API.
  * @author Mamadou Lamine NIANG
  **/
 @Service
@@ -36,30 +38,43 @@ public class ZabbixApiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
     }
 
-    public ZabbixResponse call(@Valid ZabbixRequest request) throws ZabbixApiException {
-        HttpEntity<ZabbixRequest> httpEntity = new HttpEntity<>(request, headers);
-        String apiUrl = properties.getUrl() + Constants.API_ENDPOINT;
+    /**
+     * Makes a call to Zabbix API
+     * @param request               The request object.
+     * @return                      A JSON RPC 2.0 response object.
+     * @throws ZabbixApiException   When the response status is not 200 or the API returned an error.
+     */
+    public JsonRPCResponse call(@Valid JsonRPCRequest request) throws ZabbixApiException {
+        HttpEntity<JsonRPCRequest> httpEntity = new HttpEntity<>(request, headers);
+        String apiUrl = properties.getUrl() + ZabbixApiUtils.API_ENDPOINT;
         log.debug("Making request to {} with body: {}", apiUrl, request);
-        ResponseEntity<ZabbixResponse> response = restTemplate.postForEntity(apiUrl, httpEntity, ZabbixResponse.class);
+        ResponseEntity<JsonRPCResponse> response = restTemplate.postForEntity(apiUrl, httpEntity, JsonRPCResponse.class);
         if(response.getStatusCodeValue() != 200) {
             throw new ZabbixApiException(response.getStatusCodeValue());
         }
         if(!response.hasBody()) {
             throw new ZabbixApiException("Empty body received!");
         }
-        ZabbixResponse body = response.getBody();
-        if(body.isError()) {
+        JsonRPCResponse body = response.getBody();
+        if(Objects.requireNonNull(body).isError()) {
             throw new ZabbixApiException(body.getError());
         }
         return body;
     }
 
+    /**
+     * Gets an authentication token from Zabbix
+     * @param user                  The Zabbix user
+     * @param password              The password
+     * @return                      The auth token
+     * @throws ZabbixApiException   When the response status is not 200 or the API returned an error.
+     */
     public String authenticate(String user, String password) throws ZabbixApiException {
-        ZabbixRequest request = new ZabbixRequest();
+        JsonRPCRequest request = new JsonRPCRequest();
         request.setMethod("user.login");
         request.setParams(new ZabbixAuthDTO(user, password));
 
-        ZabbixResponse response = call(request);
+        JsonRPCResponse response = call(request);
 
         return response.getResult(String.class);
     }

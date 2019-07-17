@@ -1,6 +1,6 @@
 package io.github.mlniang.zabbix.client.exception;
 
-import io.github.mlniang.zabbix.client.response.ZabbixErrorDTO;
+import io.github.mlniang.zabbix.client.response.JsonRPCError;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +11,9 @@ import lombok.Setter;
 @Setter
 public class ZabbixApiException extends Exception {
 
-    private ZabbixErrorDTO error;
+    private JsonRPCError error;
 
-    public ZabbixApiException(ZabbixErrorDTO error) {
+    public ZabbixApiException(JsonRPCError error) {
         super(String.format("Error: %d\nMessage:%s\nData:%s'", error.getCode(), error.getMessage(), error.getData()));
         this.error = error;
     }

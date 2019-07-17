@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 
 import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.BooleanNumericDeserializer;
 import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.BooleanNumericSerializer;
+
 /**
+ * Zabbix Host group object.
+ *
+ * @see <a href="https://www.zabbix.com/documentation/4.0/manual/api/reference/hostgroup/object#host_group">Host group</a>
  * @author Mamadou Lamine NIANG
  **/
 @Data

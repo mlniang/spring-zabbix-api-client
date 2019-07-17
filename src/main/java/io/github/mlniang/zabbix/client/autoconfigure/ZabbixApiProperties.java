@@ -9,6 +9,9 @@ import org.springframework.util.StringUtils;
 @ConfigurationProperties(prefix = "zabbix.api", ignoreUnknownFields = false)
 public class ZabbixApiProperties {
 
+    /**
+     * URL of the Zabbix Server
+     */
     private String url;
 
     public String getUrl() {
