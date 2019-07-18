@@ -2,10 +2,7 @@ package io.github.mlniang.zabbix.client.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,41 +14,54 @@ import java.util.Map;
  * @author Mamadou Lamine NIANG
  **/
 @Data
-@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Builder(builderMethodName = "paramsBuilder", buildMethodName = "buildParams")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ZabbixGetHostParams extends CommonGetParams {
 
     @JsonProperty("groupids")
+    @Singular
     private List<String> groupIds;
     @JsonProperty("applicationids")
+    @Singular
     private List<String> applicationIds;
     @JsonProperty("dserviceids")
+    @Singular
     private List<String> discoveredServiceIds;
     @JsonProperty("graphids")
+    @Singular
     private List<String> graphIds;
     @JsonProperty("hostids")
+    @Singular
     private List<String> hostIds;
     @JsonProperty("httptestids")
+    @Singular
     private List<String> givenWebChecks;
     @JsonProperty("interfaceids")
+    @Singular
     private List<String> interfaceIds;
     @JsonProperty("itemids")
+    @Singular
     private List<String> itemIds;
     @JsonProperty("maintenanceids")
+    @Singular
     private List<String> maintenanceIds;
     @JsonProperty("monitored_hosts")
     private Boolean onlyMonitoredHosts;
     @JsonProperty("proxy_hosts")
     private Boolean onlyProxies;
     @JsonProperty("proxyids")
+    @Singular
     private List<String> proxyIds;
     @JsonProperty("templated_hosts")
     private Boolean withTemplated;
     @JsonProperty("templateids")
+    @Singular
     private List<String> templateIds;
     @JsonProperty("triggerids")
+    @Singular
     private List<String> triggerIds;
     @JsonProperty("with_items")
     private Boolean withItems;
@@ -88,5 +98,6 @@ public class ZabbixGetHostParams extends CommonGetParams {
     private Object selectScreens;
     private Object selectTriggers;
     private int limitSelects;
+    @Singular("addSearchInventory")
     private Map<String, Object> searchInventory;
 }

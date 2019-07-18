@@ -1,6 +1,5 @@
 package io.github.mlniang.zabbix.client.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import io.github.mlniang.zabbix.client.dto.ZabbixHostDTO;
 import io.github.mlniang.zabbix.client.dto.ZabbixMassAddHostDTO;
 import io.github.mlniang.zabbix.client.dto.ZabbixMassRemoveHostDTO;
@@ -10,6 +9,7 @@ import io.github.mlniang.zabbix.client.model.host.HostMethod;
 import io.github.mlniang.zabbix.client.request.JsonRPCRequest;
 import io.github.mlniang.zabbix.client.request.ZabbixGetHostParams;
 import io.github.mlniang.zabbix.client.response.JsonRPCResponse;
+import io.github.mlniang.zabbix.client.utils.JsonMapper;
 import io.github.mlniang.zabbix.client.utils.ZabbixApiUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,20 +30,12 @@ public class ZabbixHostService {
 
     public static final String HOSTS_IDS_NODE = "hostids";
 
+    private final JsonMapper jsonMapper;
     private final ZabbixApiService apiService;
 
-    public ZabbixHostService(ZabbixApiService zabbixApiService) {
+    public ZabbixHostService(JsonMapper jsonMapper, ZabbixApiService zabbixApiService) {
+        this.jsonMapper = jsonMapper;
         this.apiService = zabbixApiService;
-    }
-
-    /**
-     * Extract hostids from response.
-     * @param response  The response.
-     * @return          A list of strings.
-     */
-    private List<String> getIdsFromResponse(JsonRPCResponse response) {
-        JsonNode node = response.getResult(JsonNode.class);
-        return node.findValuesAsText(HOSTS_IDS_NODE);
     }
 
     /**
@@ -56,7 +48,7 @@ public class ZabbixHostService {
     public List<String> create(List<ZabbixHostDTO> dtos, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.CREATE, dtos, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return response.getResult().findValuesAsText(HOSTS_IDS_NODE);
     }
 
     /**
@@ -81,11 +73,10 @@ public class ZabbixHostService {
      * @return                      A list of hostDTOs.
      * @throws ZabbixApiException   When the response status is not 200 or the API returned an error.
      */
-    @SuppressWarnings("unchecked")
     public List<ZabbixHostDTO> get(ZabbixGetHostParams params, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.GET, params, auth);
         JsonRPCResponse response = apiService.call(request);
-        return (List<ZabbixHostDTO>) response.getResult();
+        return jsonMapper.getList(response.getResult(), ZabbixHostDTO.class);
     }
 
     /**
@@ -98,7 +89,7 @@ public class ZabbixHostService {
     public List<String> delete(List<String> hostIds, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.DELETE, hostIds, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return jsonMapper.getList(response.getResult(), HOSTS_IDS_NODE, String.class);
     }
 
     /**
@@ -111,7 +102,7 @@ public class ZabbixHostService {
     public List<String> massAdd(ZabbixMassAddHostDTO dto, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.MASS_ADD, dto, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return jsonMapper.getList(response.getResult(), HOSTS_IDS_NODE, String.class);
     }
 
     /**
@@ -124,7 +115,7 @@ public class ZabbixHostService {
     public List<String> massRemove(ZabbixMassRemoveHostDTO dto, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.MASS_REMOVE, dto, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return jsonMapper.getList(response.getResult(), HOSTS_IDS_NODE, String.class);
     }
 
     /**
@@ -137,7 +128,7 @@ public class ZabbixHostService {
     public List<String> massUpdate(ZabbixMassUpdateHostDTO dto, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.MASS_UPDATE, dto, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return jsonMapper.getList(response.getResult(), HOSTS_IDS_NODE, String.class);
     }
 
     /**
@@ -150,6 +141,6 @@ public class ZabbixHostService {
     public List<String> update(ZabbixHostDTO dto, String auth) throws ZabbixApiException {
         JsonRPCRequest request = ZabbixApiUtils.buildRequest(HostMethod.UPDATE, dto, auth);
         JsonRPCResponse response = apiService.call(request);
-        return getIdsFromResponse(response);
+        return jsonMapper.getList(response.getResult(), HOSTS_IDS_NODE, String.class);
     }
 }

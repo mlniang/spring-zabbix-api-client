@@ -3,6 +3,8 @@ package io.github.mlniang.zabbix.client.model.host;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +19,8 @@ import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.Boolean
  **/
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ZabbixHostInterface {
 
     @JsonProperty("interfaceid")

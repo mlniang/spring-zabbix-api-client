@@ -5,6 +5,7 @@ import io.github.mlniang.zabbix.client.dto.ZabbixAuthDTO;
 import io.github.mlniang.zabbix.client.exception.ZabbixApiException;
 import io.github.mlniang.zabbix.client.request.JsonRPCRequest;
 import io.github.mlniang.zabbix.client.response.JsonRPCResponse;
+import io.github.mlniang.zabbix.client.utils.JsonMapper;
 import io.github.mlniang.zabbix.client.utils.ZabbixApiUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -27,11 +28,13 @@ import java.util.Objects;
 public class ZabbixApiService {
 
     private final ZabbixApiProperties properties;
+    private final JsonMapper jsonMapper;
     private final RestTemplate restTemplate;
     private final HttpHeaders headers;
 
-    public ZabbixApiService(ZabbixApiProperties zabbixApiProperties) {
+    public ZabbixApiService(ZabbixApiProperties zabbixApiProperties, JsonMapper jsonMapper) {
         this.properties = zabbixApiProperties;
+        this.jsonMapper = jsonMapper;
         restTemplate = new RestTemplate();
         headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -76,6 +79,6 @@ public class ZabbixApiService {
 
         JsonRPCResponse response = call(request);
 
-        return response.getResult(String.class);
+        return jsonMapper.getObject(response.getResult(), String.class);
     }
 }

@@ -25,4 +25,8 @@ public class ZabbixApiException extends Exception {
     public ZabbixApiException(int httpCode) {
         super(String.format("Api call failed with code %d.", httpCode));
     }
+
+    public ZabbixApiException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

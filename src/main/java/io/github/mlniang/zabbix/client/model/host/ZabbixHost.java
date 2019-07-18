@@ -5,9 +5,10 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,8 @@ import static io.github.mlniang.zabbix.client.utils.CustomJsonSerializer.Boolean
  **/
 @Data
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+@SuperBuilder
 public class ZabbixHost {
 
     @JsonProperty("hostid")

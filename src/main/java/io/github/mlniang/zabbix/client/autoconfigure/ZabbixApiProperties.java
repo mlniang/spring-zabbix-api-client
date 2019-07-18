@@ -1,7 +1,8 @@
 package io.github.mlniang.zabbix.client.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.util.StringUtils;
+
+import java.util.Optional;
 
 /**
  * @author Mamadou Lamine NIANG
@@ -19,14 +20,10 @@ public class ZabbixApiProperties {
     }
 
     public void setUrl(String url) {
-        if(!StringUtils.hasText(url)) {
-            this.url = url;
-        }
-        if(url.endsWith("/")){
-           this.url = url.substring(0, url.length() - 2);
-        } else {
-            this.url = url;
-        }
+        this.url = Optional.ofNullable(url)
+                .filter(str -> str.length() != 0)
+                .map(str -> str.substring(0, str.length() - 1))
+                .orElse(url);
     }
 
 }

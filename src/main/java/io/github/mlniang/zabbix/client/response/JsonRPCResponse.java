@@ -1,6 +1,8 @@
 package io.github.mlniang.zabbix.client.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Represents a response object as defined by the <a href="https://www.jsonrpc.org/specification#response_object">JSON-RPC 2.0 specification</a>.
@@ -8,23 +10,15 @@ import lombok.Data;
  * @author Mamadou Lamine NIANG
  **/
 @Data
+@NoArgsConstructor
 public class JsonRPCResponse {
 
-    private final String jsonrpc;
-    private Object result;
+    private final String jsonrpc = "2.0";
+    private JsonNode result;
     private JsonRPCError error;
     private String id;
-
-    public JsonRPCResponse() {
-        this.jsonrpc = "2.0";
-    }
 
     public boolean isError() {
         return this.error != null;
     }
-
-    public <T> T getResult(Class<T> clazz) {
-        return clazz.cast(result);
-    }
-
 }
