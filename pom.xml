@@ -14,6 +14,13 @@
     <name>spring-zabbix-api-client</name>
     <description>Zabbix 4 API Client with Spring</description>
 
+    <developers>
+        <developer>
+            <name>Mamadou Lamine NIANG</name>
+            <email>mlniangpro@gmail.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>

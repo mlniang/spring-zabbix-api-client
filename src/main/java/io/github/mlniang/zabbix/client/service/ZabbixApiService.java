@@ -43,6 +43,14 @@ public class ZabbixApiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
     }
 
+    public JsonRPCResponse call(String method, Object params, String auth) throws ZabbixApiException {
+        JsonRPCRequest request = new JsonRPCRequest();
+        request.setAuth(auth);
+        request.setParams(params);
+        request.setMethod(method);
+        return call(request);
+    }
+
     /**
      * Makes a call to Zabbix API
      * @param request               The request object.
