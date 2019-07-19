@@ -13,11 +13,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Objects;
+
 
 /**
  * Main service making requests to Zabbix API.
@@ -32,10 +34,10 @@ public class ZabbixApiService {
     private final RestTemplate restTemplate;
     private final HttpHeaders headers;
 
-    public ZabbixApiService(ZabbixApiProperties zabbixApiProperties, JsonMapper jsonMapper) {
+    public ZabbixApiService(ZabbixApiProperties zabbixApiProperties, JsonMapper jsonMapper, RestTemplate restTemplate) {
         this.properties = zabbixApiProperties;
         this.jsonMapper = jsonMapper;
-        restTemplate = new RestTemplate();
+        this.restTemplate = restTemplate;
         headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -51,18 +53,22 @@ public class ZabbixApiService {
         HttpEntity<JsonRPCRequest> httpEntity = new HttpEntity<>(request, headers);
         String apiUrl = properties.getUrl() + ZabbixApiUtils.API_ENDPOINT;
         log.debug("Making request to {} with body: {}", apiUrl, request);
-        ResponseEntity<JsonRPCResponse> response = restTemplate.postForEntity(apiUrl, httpEntity, JsonRPCResponse.class);
-        if(response.getStatusCodeValue() != 200) {
-            throw new ZabbixApiException(response.getStatusCodeValue());
+        try {
+            ResponseEntity<JsonRPCResponse> response = restTemplate.postForEntity(apiUrl, httpEntity, JsonRPCResponse.class);
+            if(response.getStatusCodeValue() != 200) {
+                throw new ZabbixApiException(response.getStatusCodeValue());
+            }
+            if(!response.hasBody()) {
+                throw new ZabbixApiException("Empty body received!");
+            }
+            JsonRPCResponse body = response.getBody();
+            if(Objects.requireNonNull(body).isError()) {
+                throw new ZabbixApiException(body.getError());
+            }
+            return body;
+        } catch (RestClientException e) {
+            throw new ZabbixApiException("Error making request to Zabbix Server", e);
         }
-        if(!response.hasBody()) {
-            throw new ZabbixApiException("Empty body received!");
-        }
-        JsonRPCResponse body = response.getBody();
-        if(Objects.requireNonNull(body).isError()) {
-            throw new ZabbixApiException(body.getError());
-        }
-        return body;
     }
 
     /**
