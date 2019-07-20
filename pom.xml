@@ -201,6 +201,11 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-api</artifactId>
+                        <version>${version.maven-scm-provider-gitexe}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
                         <artifactId>maven-scm-provider-gitexe</artifactId>
                         <version>${version.maven-scm-provider-gitexe}</version>
                     </dependency>

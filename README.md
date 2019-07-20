@@ -1,6 +1,11 @@
 # spring-zabbix-api-client
 Helper Library for using Zabbix API from a Spring Boot application based on the [Zabbix API version 4.0](https://www.zabbix.com/documentation/4.0/manual/api).
 
+[![Build Status](https://travis-ci.org/mlniang/spring-zabbix-api-client.svg?branch=master)](https://travis-ci.org/mlniang/spring-zabbix-api-client)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.mlniang/spring-zabbix-api-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.mlniang/spring-zabbix-api-client)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+<!---[![Dependency Status](https://www.versioneye.com/user/projects/57cafb94939fc6004abe4b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57cafb94939fc6004abe4b21)--->
+
 ## Usage
 Set the property `zabbix.api.url` in your properties file as the URL of the Zabbix Server (without `/api_jsonrpc.php`).
 
