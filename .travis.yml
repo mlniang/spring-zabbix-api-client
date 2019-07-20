@@ -1,0 +1,14 @@
+language: java
+jdk:
+- oraclejdk8
+- openjdk8
+env:
+  global:
+    secure: &token Sr6xz1FuVE/jdtNU1saOgjn22dNFwsmTbrldtsbH5V2Fls5FuYypENT+RaQLdbjexbM6IgUdM9WQMTug5Qi+IdKkxrPI7zKtfl5mHYHwOdDbPgEc2pniSRnlXWG7lkGgV4FmQmH6dPqBs9EyGyFzuTAjjVoJ7GrAfSEq+kUyp2UtzvdRiDkTrNDHdSd53ihkmJYQAWbNZpa+AP594SEtOIK5oNSb8Y/cfBAkH8E5mZTAnpqKEJbqsoI5Icm9skcbfX5PC4J7RA/crdlJgcGyDTxU8jOwUg0MaBBQ0OEzO13zJ3s7O/sv61lLpGpuNP0A/LdnZZCcrdNtgL66JQ7Kk2pYyyzYQ8xsNHVKdEm/cypWQ4M5rU+iuI9O411Mh6HkzzbgBfxyZnbYZ1Zuy+EPJLTAyyQ+3NLk4fuzGSkFODRx3dbf+2OMme0n40ATjYINb2ds75oVUjBndeuOLF+/hrE6D8SE1Memb9CZP8h8tftghc+aaC6CfsoIblR1TnyqJ3CAo0ESi/0hHi/NTu4CKuqvVYU6yCJUS0CqK9SYB3LxxXc9m1FXvl9dxDyyUbflZDUsAWKoy+13YhDYaiY2DZptjvEEqIZhoDiXkUi/2GuO/rnz3b3T3r21j8nE1jUYU3XXFe1Hl1eBzfPHqn42IuzYmAYjVw+s+IEYYeoMqkw=
+addons:
+  sonarcloud:
+    organization: mlniang
+    token:
+      secure: *token
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
