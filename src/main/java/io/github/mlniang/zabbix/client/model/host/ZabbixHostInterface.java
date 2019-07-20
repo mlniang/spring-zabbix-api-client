@@ -40,5 +40,6 @@ public class ZabbixHostInterface {
     private boolean useIp;
     @JsonSerialize(using = BooleanNumericSerializer.class)
     @JsonDeserialize(using = BooleanNumericDeserializer.class)
+    @Builder.Default
     private boolean bulk = true;
 }
