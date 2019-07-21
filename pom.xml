@@ -21,6 +21,14 @@
         </developer>
     </developers>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <scm>
         <connection>scm:git:git://github.com/mlniang/spring-zabbix-api-client.git</connection>
         <developerConnection>scm:git:git@github.com:mlniang/spring-zabbix-api-client.git</developerConnection>
