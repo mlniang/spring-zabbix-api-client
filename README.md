@@ -7,6 +7,15 @@ Helper Library for using Zabbix API from a Spring Boot application based on the 
 <!---[![Dependency Status](https://www.versioneye.com/user/projects/57cafb94939fc6004abe4b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57cafb94939fc6004abe4b21)--->
 
 ## Usage
+Import using:
+```xml
+<dependency>
+    <groupId>io.github.mlniang</groupId>
+    <artifactId>spring-zabbix-api-client</artifactId>
+    <version>0.1</optional>
+</dependency>
+```
+
 Set the property `zabbix.api.url` in your properties file as the URL of the Zabbix Server (without `/api_jsonrpc.php`).
 
 The `ZabbixApiService` offers a general method you can use to make calls to the API. Example:
