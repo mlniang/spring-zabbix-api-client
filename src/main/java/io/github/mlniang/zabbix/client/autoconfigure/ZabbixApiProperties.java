@@ -22,7 +22,7 @@ public class ZabbixApiProperties {
     public void setUrl(String url) {
         this.url = Optional.ofNullable(url)
                 .filter(str -> str.length() != 0)
-                .map(str -> str.substring(0, str.length() - 1))
+                .map(str -> str.endsWith("/") ? str.substring(0, str.length() - 1) : str)
                 .orElse(url);
     }
 

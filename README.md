@@ -12,7 +12,7 @@ Import using:
 <dependency>
     <groupId>io.github.mlniang</groupId>
     <artifactId>spring-zabbix-api-client</artifactId>
-    <version>0.1</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
